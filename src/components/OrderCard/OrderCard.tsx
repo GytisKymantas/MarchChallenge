@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
-import { OPTIONS } from '../../constants/OrderCard';
+import React, { useState } from 'react';
 import { useStock } from '../../hooks/use-stock';
-import useStockData from '../../hooks/use-stock-data';
+import useDataFetch from '../../hooks/use-stock-data';
 import { OptionsEnum } from '../../types/types';
 import StockInformation from '../StockInformation/StockInformation';
 import { Typography, Button, Box, TextField, useTheme } from '@mui/material';
@@ -10,17 +9,16 @@ import OptionsSelect from '../OptionsSelect/OptionsSelect';
 
 const OrderCard: React.FC = () => {
   const { palette } = useTheme();
-  const { stockUnit, setStockUnit, onPurchase, isLoading } = useStock();
-  const { stockPrice } = useStockData();
+  const {
+    stockUnit,
+    handleChange,
+    onPurchase,
+    isLoading: isPurchaseLoading,
+  } = useStock();
+  const { stockPrice, isLoading: isFetchingLoading } = useDataFetch();
   const { isMobile } = useQuery();
   const [selectedOption, setSelectedOption] = useState(OptionsEnum.Market);
   const isError = stockUnit < 1 || isNaN(stockUnit);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // TODO hook
-    const value = parseInt(e.target.value);
-    setStockUnit(value);
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,14 +61,7 @@ const OrderCard: React.FC = () => {
           defaultValue='AAPL'
           margin='normal'
         />
-        <Box
-          display='flex'
-          gap='0.625rem'
-          height='6.25rem'
-          // pb='200px'
-          id='krabas'
-          alignItems='center'
-        >
+        <Box display='flex' gap='0.625rem' height='6.25rem' alignItems='center'>
           <Box display='flex' flexDirection='column'>
             <TextField
               type='number'
@@ -84,7 +75,7 @@ const OrderCard: React.FC = () => {
                   '&:hover fieldset': {
                     borderColor: isError ? palette.red.main : palette.gray.main,
                   },
-                  minWidth: isMobile ? '4.0625rem' : '8.3181rem',
+                  minWidth: isMobile ? '5.4619rem' : '8.3181rem',
                 },
               }}
               InputLabelProps={{
@@ -99,20 +90,19 @@ const OrderCard: React.FC = () => {
               }}
               onChange={handleChange}
               value={stockUnit}
-              error={stockUnit < 1}
+              error={isError}
               inputProps={{ min: 1, max: 100 }}
               margin='normal'
             />
-            {isError && (
-              <Typography
-                margin='normal'
-                color={palette.red.main}
-                variant='body2'
-                component='span'
-              >
-                Please add a number
-              </Typography>
-            )}
+            <Typography
+              margin='normal'
+              color={isError ? palette.red.main : palette.transparent.main}
+              variant='body2'
+              component='span'
+              fontSize='9px'
+            >
+              Please add a number
+            </Typography>
           </Box>
           <OptionsSelect
             setSelectedOption={setSelectedOption}
@@ -123,6 +113,7 @@ const OrderCard: React.FC = () => {
           stockUnit={stockUnit}
           isError={isError}
           stockPrice={stockPrice}
+          isFetchingLoading={isFetchingLoading}
         />
         <Box display='flex' justifyContent='flex-end' mt='2.5rem'>
           <Button
@@ -135,13 +126,10 @@ const OrderCard: React.FC = () => {
               borderRadius: '1.875rem',
               letterSpacing: '0.0625rem',
               textTransform: 'capitalize',
-              '&:disabled': {
-                backgroundColor: palette.gray.dark,
-              },
             }}
-            disabled={isLoading}
+            disabled={isFetchingLoading || isPurchaseLoading || isError}
           >
-            {isLoading ? '...loading' : 'Buy APPL'}
+            {isPurchaseLoading ? '...loading' : 'Buy APPL'}
           </Button>
         </Box>
       </form>

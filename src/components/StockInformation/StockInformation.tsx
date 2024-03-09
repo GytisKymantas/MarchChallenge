@@ -1,23 +1,19 @@
 import { memo } from 'react';
 import { handleFinalStockPrice } from '../../utils/Stocks';
 import { Typography, Box, useTheme } from '@mui/material';
+import Loader from '../Loader/Loader';
 
 interface StockInformationProp {
   stockUnit: number;
   stockPrice: number;
   isError?: boolean;
+  isFetchingLoading: boolean;
 }
 
 const StockInformation: React.FC<StockInformationProp> = memo(
-  ({ stockUnit, stockPrice, isError }) => {
+  ({ stockUnit, stockPrice, isError, isFetchingLoading }) => {
     const { palette } = useTheme();
-    const getStock = (() => {
-      if (!stockUnit) {
-        return 1;
-      }
-
-      return stockUnit;
-    })();
+    const getStock = stockUnit ?? 1;
 
     return (
       <Box>
@@ -35,14 +31,21 @@ const StockInformation: React.FC<StockInformationProp> = memo(
               APPLE INC
             </Typography>
           </Box>
-          <Typography
-            pr='10px'
-            color={palette.gray.light}
-            variant='h4'
-            component='h4'
-          >
-            ${stockPrice.toFixed(2)}
-          </Typography>
+          {isFetchingLoading ? (
+            <Box mr='50px' mt='-9px'>
+              {' '}
+              <Loader />
+            </Box>
+          ) : (
+            <Typography
+              pr='10px'
+              color={palette.gray.light}
+              variant='h4'
+              component='h4'
+            >
+              ${stockPrice.toFixed(2)}
+            </Typography>
+          )}
         </Box>
         <Box padding='10px'>
           <Typography color={palette.gray.dark} variant='body1' component='p'>
@@ -58,9 +61,11 @@ const StockInformation: React.FC<StockInformationProp> = memo(
               Select number of Shares
             </Typography>
           ) : (
-            <Typography color={palette.gray.main} variant='body1' component='p'>
-              Buy {getStock}x${stockPrice} AAPL = $
-              {handleFinalStockPrice(getStock, stockPrice)}
+            <Typography color={palette.gray.main} variant='body2' component='p'>
+              {isFetchingLoading
+                ? '...Calculating'
+                : `Buy ${getStock}x${stockPrice} AAPL = $
+              ${handleFinalStockPrice(getStock, stockPrice)}`}
             </Typography>
           )}
         </Box>

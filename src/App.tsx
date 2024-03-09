@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import OrderCard from './components/OrderCard/OrderCard';
-
 declare module '@mui/material/styles' {
   interface Palette {
     tertiary: Palette['primary'];
@@ -8,6 +7,7 @@ declare module '@mui/material/styles' {
     gray2: Palette['primary'];
     red: Palette['primary'];
     purple: Palette['primary'];
+    transparent: Palette['primary'];
   }
   interface PaletteOptions {
     tertiary: PaletteOptions['primary'];
@@ -15,6 +15,7 @@ declare module '@mui/material/styles' {
     gray2: PaletteOptions['primary'];
     red: PaletteOptions['primary'];
     purple: PaletteOptions['primary'];
+    transparent: PaletteOptions['primary'];
   }
 }
 
@@ -40,6 +41,9 @@ export const theme = createTheme({
     },
     purple: {
       main: '#d9bef7',
+    },
+    transparent: {
+      main: 'transparent',
     },
   },
 });
