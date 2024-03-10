@@ -57,7 +57,6 @@ const OrderCard: React.FC = () => {
           InputLabelProps={{ style: { color: palette.gray.main } }}
           InputProps={{ style: { color: palette.gray.main } }}
           label='Security'
-          value='AAPL'
           defaultValue='AAPL'
           margin='normal'
         />
@@ -89,9 +88,8 @@ const OrderCard: React.FC = () => {
                 },
               }}
               onChange={handleChange}
-              value={stockUnit}
+              defaultValue={isNaN(stockUnit) ? '' : stockUnit}
               error={isError}
-              inputProps={{ min: 1, max: 100 }}
               margin='normal'
             />
             <Typography

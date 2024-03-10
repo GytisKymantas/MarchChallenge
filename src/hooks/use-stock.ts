@@ -4,11 +4,11 @@ import { OptionsEnum } from '../types/types';
 export const useStock = () => {
   const [stockUnit, setStockUnit] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null); //TODO
+  const [error, setError] = useState<Error | null>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => { 
     const value = parseInt(e.target.value);
-    setStockUnit(value);
+      setStockUnit(value);
   };
 
   const onPurchase = async (price: number, selectedType: OptionsEnum) => {
