@@ -55,8 +55,8 @@ const OrderCard: React.FC = () => {
               },
             },
           }}
-          InputLabelProps={{ style: { color: palette.gray.main } }}
-          InputProps={{ style: { color: palette.gray.main } }}
+          InputLabelProps={{ style: { color: palette.purple.light } }}
+          InputProps={{ style: { color: palette.purple.light } }}
           label='Security'
           defaultValue='AAPL'
           margin='normal'
@@ -73,19 +73,21 @@ const OrderCard: React.FC = () => {
                     borderColor: isError ? palette.red.main : palette.gray.main,
                   },
                   '&:hover fieldset': {
-                    borderColor: isError ? palette.red.main : palette.gray.main,
+                    borderColor: isError
+                      ? palette.red.main
+                      : palette.purple.light,
                   },
                   minWidth: isMobile ? '5.4619rem' : '8.3181rem',
                 },
               }}
               InputLabelProps={{
                 style: {
-                  color: isError ? palette.red.main : palette.gray.main,
+                  color: isError ? palette.red.main : palette.purple.light,
                 },
               }}
               InputProps={{
                 style: {
-                  color: isError ? palette.red.main : palette.gray.main,
+                  color: isError ? palette.red.main : palette.purple.light,
                 },
               }}
               onChange={handleChange}

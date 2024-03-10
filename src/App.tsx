@@ -34,6 +34,7 @@ export const theme = createTheme({
     gray2: {
       main: '#6f6f6f',
       dark: '#818181',
+      light: '#9f9f9f',
     },
     red: {
       main: '#d3302f',
@@ -41,6 +42,7 @@ export const theme = createTheme({
     },
     purple: {
       main: '#d9bef7',
+      light: '#f2f1f2',
     },
     transparent: {
       main: 'transparent',

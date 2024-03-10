@@ -27,7 +27,11 @@ const StockInformation: React.FC<StockInformationProp> = memo(
             <Typography color={palette.gray.light} variant='h5' component='h2'>
               AAPL
             </Typography>
-            <Typography color={palette.gray.main} variant='body2' component='p'>
+            <Typography
+              color={palette.purple.light}
+              variant='body2'
+              component='p'
+            >
               APPLE INC
             </Typography>
           </Box>
@@ -48,7 +52,7 @@ const StockInformation: React.FC<StockInformationProp> = memo(
           )}
         </Box>
         <Box padding='10px'>
-          <Typography color={palette.gray.dark} variant='body1' component='p'>
+          <Typography color={palette.gray2.light} variant='body1' component='p'>
             Estimated trading amount:
           </Typography>
           {isError ? (
@@ -61,7 +65,11 @@ const StockInformation: React.FC<StockInformationProp> = memo(
               Select number of Shares
             </Typography>
           ) : (
-            <Typography color={palette.gray.main} variant='body2' component='p'>
+            <Typography
+              color={palette.purple.light}
+              variant='body2'
+              component='p'
+            >
               {isFetchingLoading
                 ? '...Calculating'
                 : `Buy ${getStock}x${stockPrice} AAPL = $
