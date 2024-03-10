@@ -8,16 +8,17 @@ export const useStock = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => { 
     const value = parseInt(e.target.value);
-      setStockUnit(value);
+    if (value.toString().length <= 3) {
+      setStockUnit(value)
+    }
   };
-
   const onPurchase = async (price: number, selectedType: OptionsEnum) => {
     try {
       setIsLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
       alert(
-        `Purchase successful!\nPrice: $${price}\nOrder type: ${selectedType}`
+        `Purchase successful!\nPrice: $${(price * stockUnit).toFixed(2)}\nOrder type: ${selectedType}`
       );
     } catch (error) {
       setError(error as Error);

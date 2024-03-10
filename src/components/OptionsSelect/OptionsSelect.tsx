@@ -31,7 +31,7 @@ const OptionsSelect: React.FC<OptionsSelectProps> = ({
             sx={{
               color: palette.purple.main,
               textTransform: 'capitalize',
-              borderRadius: '30px',
+              borderRadius: '1.875rem',
               backgroundColor:
                 selectedOption === option ? 'secondary' : palette.red.dark,
               width: '100%',

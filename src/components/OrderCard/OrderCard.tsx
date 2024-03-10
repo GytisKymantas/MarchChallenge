@@ -19,6 +19,7 @@ const OrderCard: React.FC = () => {
   const { isMobile } = useQuery();
   const [selectedOption, setSelectedOption] = useState(OptionsEnum.Market);
   const isError = stockUnit < 1 || isNaN(stockUnit);
+  const isButtonDisabled = isFetchingLoading || isPurchaseLoading || isError;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,7 +89,7 @@ const OrderCard: React.FC = () => {
                 },
               }}
               onChange={handleChange}
-              defaultValue={isNaN(stockUnit) ? '' : stockUnit}
+              value={isNaN(stockUnit) ? '' : stockUnit.toString().slice(0, 3)}
               error={isError}
               margin='normal'
             />
@@ -125,7 +126,7 @@ const OrderCard: React.FC = () => {
               letterSpacing: '0.0625rem',
               textTransform: 'capitalize',
             }}
-            disabled={isFetchingLoading || isPurchaseLoading || isError}
+            disabled={isButtonDisabled}
           >
             {isPurchaseLoading ? '...loading' : 'Buy APPL'}
           </Button>

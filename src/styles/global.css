@@ -11,8 +11,8 @@ input::-webkit-inner-spin-button {
 
 .circle-container {
   position: relative;
-  height: 25px;
-  width: 25px;
+  height: 1.5625rem;
+  width: 1.5625rem;
 }
 
 .circle-progress {
