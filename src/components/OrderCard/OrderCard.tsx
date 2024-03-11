@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStock } from '../../hooks/use-stock';
-import useDataFetch from '../../hooks/use-stock-data';
+import useDataFetch from '../../hooks/use-data-fetch';
 import { OptionsEnum } from '../../types/types';
 import StockInformation from '../StockInformation/StockInformation';
 import { Typography, Button, Box, TextField, useTheme } from '@mui/material';

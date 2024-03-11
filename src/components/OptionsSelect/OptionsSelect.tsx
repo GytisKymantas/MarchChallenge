@@ -16,12 +16,7 @@ const OptionsSelect: React.FC<OptionsSelectProps> = ({
   return (
     <>
       {OPTIONS.map((option, index) => (
-        <Box
-          key={index}
-          sx={{
-            fontWeight: selectedOption === option ? 'bold' : 'normal',
-          }}
-        >
+        <Box key={index}>
           <Button
             variant='contained'
             size='small'
@@ -32,6 +27,7 @@ const OptionsSelect: React.FC<OptionsSelectProps> = ({
               color: palette.purple.main,
               textTransform: 'capitalize',
               borderRadius: '1.875rem',
+              fontWeight: selectedOption === option ? 'bold' : 'normal',
               backgroundColor:
                 selectedOption === option ? 'secondary' : palette.red.dark,
               width: '100%',
